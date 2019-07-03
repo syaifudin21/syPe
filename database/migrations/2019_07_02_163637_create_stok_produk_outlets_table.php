@@ -16,10 +16,10 @@ class CreateStokProdukOutletsTable extends Migration
         Schema::create('stok_produk_outlets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('produk_id');
-            $table->integer('stok_awal', 5);
-            $table->integer('debit', 5)->nullable();
-            $table->integer('kredit', 5)->nullable();
-            $table->integer('stok_akhir', 5);
+            $table->integer('stok_awal');
+            $table->integer('debit')->nullable();
+            $table->integer('kredit')->nullable();
+            $table->integer('stok_akhir');
             $table->integer('invoice')->nullable();
             $table->json('keterangan');
             $table->timestamps();

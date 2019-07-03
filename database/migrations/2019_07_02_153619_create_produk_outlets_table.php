@@ -19,8 +19,8 @@ class CreateProdukOutletsTable extends Migration
             $table->string('nama_produk');
             $table->text('deskripsi');
             $table->string('barcode', 50);
-            $table->integer('harga_beli', 10);
-            $table->integer('harga_jual', 10);
+            $table->integer('harga_beli');
+            $table->integer('harga_jual');
             $table->timestamps();
         });
     }

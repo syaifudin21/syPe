@@ -18,7 +18,7 @@ class CreateKirimStoksTable extends Migration
             $table->integer('ownner_id');
             $table->integer('outlet_id');
             $table->text('produk');
-            $table->integer('tagihan', 10);
+            $table->integer('tagihan');
             $table->enum('status', ['Permintaan', 'Konfirmasi', 'Dikirim','Sampai']);
             $table->text('keterangan');
             $table->timestamps();

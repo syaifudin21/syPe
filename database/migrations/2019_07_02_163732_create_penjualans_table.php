@@ -21,9 +21,10 @@ class CreatePenjualansTable extends Migration
             $table->integer('outlet_id');
             $table->integer('kasir_id');
             $table->integer('pelanggan_id')->nullable();
-            $table->integer('tagihan', 10);
+            $table->integer('tagihan');
             $table->enum('status', ['Draft', 'Lunas']);
             $table->string('catatan');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
