@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Outlet;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -30,7 +31,7 @@ class LoginController extends Controller
             return redirect()->intended(route('outlet.home'));
         }
 
-        return redirect()->back()->withInput($request->only('username', 'remember'));
+        return back()->with(['alert'=> "'title':'Gagal Login','text':'Kombinasi Username dan Password tidak sesuai', 'icon':'error'"])->withInput($request->only('username', 'remember'));
     }
 
     public function logout(Request $request)

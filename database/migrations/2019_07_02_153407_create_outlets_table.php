@@ -21,6 +21,8 @@ class CreateOutletsTable extends Migration
             $table->string('password');
             $table->string('hp', 15);
             $table->text('alamat');
+            $table->text('foto')->nullable();
+            $table->text('ktp')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

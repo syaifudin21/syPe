@@ -1,53 +1,41 @@
 <?php
 
-function hari_tanggal($tanggal, $cetak_hari = false)
+namespace App\Helper;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Waktu extends Model
 {
-    $tanggal = date('Y-m-d', strtotime($tanggal));
-    $hari = array ( 1 => 'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu' );
-    $bulan = array (1 => 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
-    $split    = explode('-', $tanggal);
+    public function hari_tanggal($tanggal, $cetak_hari = false)
+    {
+        $tanggal = date('Y-m-d', strtotime($tanggal));
+        $hari = array ( 1 => 'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu' );
+        $bulan = array (1 => 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
+        $split    = explode('-', $tanggal);
 
-    $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+        $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
 
-    if ($cetak_hari) {
-        $num = date('N', strtotime($tanggal));
-        return $hari[$num] . ', ' . $tgl_indo;
+        if ($cetak_hari) {
+            $num = date('N', strtotime($tanggal));
+            return $hari[$num] . ', ' . $tgl_indo;
+        }
+        return $tgl_indo;
     }
-    return $tgl_indo;
-}
-function hari_tanggal_waktu($datetime, $cetak_hari = false)
-{
-    $hari = array ( 1 => 'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu' );
-    $bulan = array (1 => 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
-    $tanggal    = substr($datetime, '0','10');
-    $split    = explode('-', $tanggal);
-    // return $split[2]. ' '.$bulan[ (int)$split[1] ]. ' '. $split['0'] ;
-    $waktu    = substr($datetime, '10');
-    $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
-    // $tgl_indo = substr($tgl_indo, 9);
+    public function hari_tanggal_waktu($datetime, $cetak_hari = false)
+    {
+        $hari = array ( 1 => 'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu' );
+        $bulan = array (1 => 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
+        $tanggal    = substr($datetime, '0','10');
+        $split    = explode('-', $tanggal);
+        // return $split[2]. ' '.$bulan[ (int)$split[1] ]. ' '. $split['0'] ;
+        $waktu    = substr($datetime, '10');
+        $tgl_indo = $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+        // $tgl_indo = substr($tgl_indo, 9);
 
-    if ($cetak_hari) {
-        $num = date('N', strtotime($datetime));
-        return $hari[$num] . ', ' . $tgl_indo. ' - '. $waktu;
+        if ($cetak_hari) {
+            $num = date('N', strtotime($datetime));
+            return $hari[$num] . ', ' . $tgl_indo. ' - '. $waktu;
+        }
+        return $tgl_indo;
     }
-    return $tgl_indo;
-}
-
-function limit_text($text, $limit) {
-    if (str_word_count($text, 0) > $limit) {
-        $words = str_word_count($text, 2);
-        $pos = array_keys($words);
-        $text = substr($text, 0, $pos[$limit]) . '...';
-    }
-    return $text;
-}
-
-function limit_word($text, $limit)
-{
-    if (strlen($text) > $limit) {
-
-        $text = substr($text, 0, $limit) . "...";
-        // $text = strlen($text);
-    }
-    return $text;
 }

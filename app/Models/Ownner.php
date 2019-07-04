@@ -10,7 +10,7 @@ class Ownner extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'nama', 'username', 'password', 'hp', 'alamat'
+        'nama', 'username', 'password', 'hp', 'alamat', 'foto', 'ktp'
     ];
     protected $hidden = [
         'password', 'remember_token',

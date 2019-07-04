@@ -10,7 +10,7 @@ class Outlet extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'ownner_id','nama', 'username', 'password', 'hp', 'alamat'
+        'ownner_id','nama', 'username', 'password', 'hp', 'alamat', 'foto', 'ktp'
     ];
     protected $hidden = [
         'password', 'remember_token',

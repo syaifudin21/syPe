@@ -1,25 +1,23 @@
 <?php
 
 
-Route::get('/', 'Dokter\HomeController@index')->name('dokter.home');
-Route::get('/login', 'Dokter\LoginController@form');
-Route::post('/login', 'Dokter\LoginController@login')->name('dokter.login');
-Route::post('/logout', 'Dokter\LoginController@logout')->name('dokter.logout');
+Route::get('/', 'Admin\HomeController@index')->name('admin.home');
+Route::get('/login', 'Admin\LoginController@form');
+Route::post('/login', 'Admin\LoginController@login')->name('admin.login');
+Route::post('/logout', 'Admin\LoginController@logout')->name('admin.logout');
 
-Route::get('/profil', 'Dokter\ProfilController@profil')->name('dokter.profil');
-Route::put('/profil/update', 'Dokter\ProfilController@profilupdate')->name('dokter.profil.update');
-Route::put('/profil/password', 'Dokter\ProfilController@profilupdatepasword')->name('dokter.profil.password');
-Route::get('/dokter/status', 'Dokter\ProfilController@status')->name('dokter.dokter.status');
+Route::get('/outlet', 'Admin\OutletController@index')->name('admin.outlet');
+Route::get('/outlet/create', 'Admin\OutletController@create')->name('admin.outlet.create');
+Route::get('/outlet/show/{id}', 'Admin\OutletController@show')->name('admin.outlet.show');
+Route::post('/outlet/tambah', 'Admin\OutletController@store')->name('admin.outlet.store');
+Route::get('/outlet/edit/{id}', 'Admin\OutletController@edit')->name('admin.outlet.edit');
+Route::put('/outlet/update', 'Admin\OutletController@update')->name('admin.outlet.update');
+Route::delete('/outlet/tambah/akhir', 'Admin\OutletController@storeakhir')->name('admin.outlet.delete');
 
-Route::get('/dokter/show/{id}', 'dokter\ProfilController@dokterprofil')->name('dokter.dokter.show');
-Route::get('/pasien/show/{id}', 'dokter\ProfilController@pasienprofil')->name('dokter.pasien.show');
-
-Route::get('/diagnosa', 'Dokter\DiagnosaController@index')->name('dokter.diagnosa');
-Route::get('/diagnosa/tambah/{periksa_id}', 'Dokter\DiagnosaController@create')->name('dokter.diagnosa.create');
-Route::post('/diagnosa/tambah', 'Dokter\DiagnosaController@store')->name('dokter.diagnosa.store');
-
-Route::get('/periksa', 'Dokter\PeriksaController@index')->name('dokter.periksa');
-Route::get('/periksa/show/{id}', 'Dokter\PeriksaController@show')->name('dokter.periksa.show');
-Route::post('/periksa/tambah/pra', 'Dokter\PeriksaController@storepra')->name('dokter.periksa.store.pra');
-Route::post('/periksa/tambah/primer', 'Dokter\PeriksaController@storeprimer')->name('dokter.periksa.store.primer');
-Route::delete('/periksa/tambah/akhir', 'Dokter\PeriksaController@storeakhir')->name('dokter.periksa.store.akhir');
+Route::get('/ownner', 'Admin\OwnnerController@index')->name('admin.ownner');
+Route::get('/ownner/create', 'Admin\OwnnerController@create')->name('admin.ownner.create');
+Route::get('/ownner/show/{id}', 'Admin\OwnnerController@show')->name('admin.ownner.show');
+Route::post('/ownner/tambah', 'Admin\OwnnerController@store')->name('admin.ownner.store');
+Route::get('/ownner/edit/{id}', 'Admin\OwnnerController@edit')->name('admin.ownner.edit');
+Route::put('/ownner/update', 'Admin\OwnnerController@update')->name('admin.ownner.update');
+Route::delete('/ownner/tambah/akhir', 'Admin\OwnnerController@storeakhir')->name('admin.ownner.delete');

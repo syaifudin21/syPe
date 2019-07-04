@@ -1,25 +1,19 @@
 <?php
 
 
-Route::get('/', 'Dokter\HomeController@index')->name('dokter.home');
-Route::get('/login', 'Dokter\LoginController@form');
-Route::post('/login', 'Dokter\LoginController@login')->name('dokter.login');
-Route::post('/logout', 'Dokter\LoginController@logout')->name('dokter.logout');
+Route::get('/', 'Outlet\HomeController@index')->name('outlet.home');
+Route::get('/login', 'Outlet\LoginController@form');
+Route::post('/login', 'Outlet\LoginController@login')->name('outlet.login');
+Route::post('/logout', 'Outlet\LoginController@logout')->name('outlet.logout');
 
-Route::get('/profil', 'Dokter\ProfilController@profil')->name('dokter.profil');
-Route::put('/profil/update', 'Dokter\ProfilController@profilupdate')->name('dokter.profil.update');
-Route::put('/profil/password', 'Dokter\ProfilController@profilupdatepasword')->name('dokter.profil.password');
-Route::get('/dokter/status', 'Dokter\ProfilController@status')->name('dokter.dokter.status');
+Route::get('/profil', 'Outlet\ProfilController@profil')->name('outlet.profil');
+Route::put('/profil/update', 'Outlet\ProfilController@profilupdate')->name('outlet.profil.update');
+Route::put('/profil/password', 'Outlet\ProfilController@profilupdatepasword')->name('outlet.profil.password');
+Route::get('/outlet/status', 'Outlet\ProfilController@status')->name('outlet.outlet.status');
 
-Route::get('/dokter/show/{id}', 'dokter\ProfilController@dokterprofil')->name('dokter.dokter.show');
-Route::get('/pasien/show/{id}', 'dokter\ProfilController@pasienprofil')->name('dokter.pasien.show');
-
-Route::get('/diagnosa', 'Dokter\DiagnosaController@index')->name('dokter.diagnosa');
-Route::get('/diagnosa/tambah/{periksa_id}', 'Dokter\DiagnosaController@create')->name('dokter.diagnosa.create');
-Route::post('/diagnosa/tambah', 'Dokter\DiagnosaController@store')->name('dokter.diagnosa.store');
-
-Route::get('/periksa', 'Dokter\PeriksaController@index')->name('dokter.periksa');
-Route::get('/periksa/show/{id}', 'Dokter\PeriksaController@show')->name('dokter.periksa.show');
-Route::post('/periksa/tambah/pra', 'Dokter\PeriksaController@storepra')->name('dokter.periksa.store.pra');
-Route::post('/periksa/tambah/primer', 'Dokter\PeriksaController@storeprimer')->name('dokter.periksa.store.primer');
-Route::delete('/periksa/tambah/akhir', 'Dokter\PeriksaController@storeakhir')->name('dokter.periksa.store.akhir');
+Route::get('/kasir', 'Outlet\kasirController@index')->name('outlet.kasir');
+Route::get('/kasir/show/{id}', 'Outlet\kasirController@show')->name('outlet.kasir.show');
+Route::post('/kasir/tambah', 'Outlet\kasirController@store')->name('outlet.kasir.store');
+Route::get('/kasir/edit/{id}', 'Outlet\kasirController@edit')->name('outlet.kasir.edit');
+Route::post('/kasir/update', 'Outlet\kasirController@update')->name('outlet.kasir.store');
+Route::delete('/kasir/tambah/akhir', 'Outlet\kasirController@storeakhir')->name('outlet.kasir.delete');

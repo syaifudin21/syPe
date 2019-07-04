@@ -35,7 +35,7 @@ class RedirectIfAuthenticated
                 break;
             default:
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('pasien.home');
+                    return redirect()->route('kasir.home');
                 }
                 break;
         }
