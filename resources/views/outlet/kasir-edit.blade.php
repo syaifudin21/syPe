@@ -6,8 +6,8 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1>Produk</h1>
-            <p>Informasi Produk yang terdaftar</p>
+            <h1>Kasir {{$kasir->nama}} Update</h1>
+            <p>Informasi kasir akan diedit</p>
         </div>
     </div>
 
@@ -15,56 +15,55 @@
         <div class="col-md-12">
 			<div class="tile">
 			  <div class="tile-body">
-				<form class="form-horizontal" id="submit-form" enctype="multipart/form-data" method="post" action="{{route('outlet.produk.store')}}">
-                    {{ csrf_field() }}
+				<form class="form-horizontal" id="submit-form" enctype="multipart/form-data" method="post" action="{{route('outlet.kasir.update')}}">
+                    {{ csrf_field() }} @method('PUT') <input type="hidden" name="id" value="{{$kasir->id}}">
     
                         <div class="row">
     
                             <div class="col-md-9 col-sm-12">
                                <div class="form-group row">
-                                    <label for="nama_produk" class="col-sm-2 col-form-label">Nama Produk</label>
+                                    <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="nama_produk" id="nama_produk" placeholder="Nama Produk" value="{{old('nama_produk')}}">
-                                        @if ($errors->has('nama_produk'))
-                                            <small class="form-text text-muted">{{ $errors->first('nama_produk') }}</small>
-                                        @endif
-                                    </div>
-                                </div>
-                               
-                                <div class="form-group row">
-                                    <label for="harga_beli" class="col-sm-2 col-form-label">Harga Beli</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="harga_beli" id="harga_beli" placeholder="Harga Beli" value="{{old('harga_beli')}}">
-                                        @if ($errors->has('harga_beli'))
-                                            <small class="form-text text-muted">{{ $errors->first('harga_beli') }}</small>
+                                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Reporter" value="{{$kasir->nama}}">
+                                        @if ($errors->has('nama'))
+                                            <small class="form-text text-muted">{{ $errors->first('nama') }}</small>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="harga_jual" class="col-sm-2 col-form-label">Harga Jual</label>
+                                    <label for="username" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="harga_jual" id="harga_jual" placeholder="Harga Jual" value="{{old('harga_jual')}}">
-                                        @if ($errors->has('harga_jual'))
-                                            <small class="form-text text-muted">{{ $errors->first('harga_jual') }}</small>
+                                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="{{$kasir->username}}">
+                                        @if ($errors->has('username'))
+                                            <small class="form-text text-muted">{{ $errors->first('username') }}</small>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="barcode" class="col-sm-2 col-form-label">Barcode</label>
+                                    <label for="hp" class="col-sm-2 col-form-label">Handphone</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="barcode" id="barcode" placeholder="Barcode" value="{{old('barcode')}}">
-                                        @if ($errors->has('barcode'))
-                                            <small class="form-text text-muted">{{ $errors->first('barcode') }}</small>
+                                        <input type="text" class="form-control" name="hp" id="hp" placeholder="Handphone" value="{{$kasir->hp}}">
+                                        @if ($errors->has('hp'))
+                                            <small class="form-text text-muted">{{ $errors->first('hp') }}</small>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="alamat" id="alamat" placeholder="Alamat">{{$kasir->alamat}}</textarea>
+                                        @if ($errors->has('alamat'))
+                                            <small class="form-text text-muted">{{ $errors->first('alamat') }}</small>
                                         @endif
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                                    <label for="password" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi" id="deskripsi" placeholder="Deskripsi">{{old('deskripsi')}}</textarea>
-                                        @if ($errors->has('deskripsi'))
-                                            <small class="form-text text-muted">{{ $errors->first('deskripsi') }}</small>
+                                        <input type="text" class="form-control" name="password" id="password" placeholder="Password Reporter" value="{{old('password')}}">
+                                        @if ($errors->has('password'))
+                                            <small class="form-text text-muted">{{ $errors->first('password') }}</small>
                                         @endif
                                     </div>
                                 </div>
@@ -82,17 +81,19 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-3">
-                                <img src="{{asset('images/thumbnail.svg')}}" style="max-height: 130px" class="rounded" alt="thumbnail" id="foto">
+                                <img src="{{(!empty($kasir->foto))?asset($kasir->foto): asset('images/thumbnail.svg')}}" style="max-height: 130px" class="rounded" alt="thumbnail" id="foto">
                             </div>
                         </div>
+                        <input type="hidden" name="redirect" value="{{url()->previous()}}">
                     </form>
 
 			  </div>
 			  <div class="tile-footer">
 				<div class="row">
 				  <div class="col-md-8 col-md-offset-3">
-					<button class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('submit-form').submit();"><i class="fa fa-fw fa-lg fa-check-circle"></i>Tambah</button>
+					<button class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('submit-form').submit();"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
 					<a class="btn btn-secondary" href="{{url()->previous()}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Batal</a>
+					<small class="form-text text-muted" id="jadwalhelp">Dokter dapat merubah password</small>
 				</div>
 				</div>
 			  </div>

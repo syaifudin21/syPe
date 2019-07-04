@@ -10,7 +10,7 @@ class Kasir extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'outlet_id','nama', 'username', 'password', 'hp', 'alamat'
+        'outlet_id','nama', 'username', 'password', 'hp', 'alamat', 'foto', 'ktp'
     ];
     protected $hidden = [
         'password', 'remember_token',

@@ -17,8 +17,9 @@ class CreateProdukOutletsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('outlet_id');
             $table->string('nama_produk');
-            $table->text('deskripsi');
-            $table->string('barcode', 50);
+            $table->text('deskripsi')->nullable();
+            $table->text('foto')->nullable();
+            $table->string('barcode', 50)->nullable();
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->timestamps();

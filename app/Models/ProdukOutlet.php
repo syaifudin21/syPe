@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProdukOutlet extends Model
 {
     protected $fillable = [
-        'outlet_id','nama_produk','deskripsi','barcode', 'harga_beli','harga_jual'
+        'outlet_id','nama_produk','deskripsi', 'foto' ,'barcode', 'harga_beli','harga_jual'
     ];
     protected $casts = [
         'keadaan_pra' => 'array',

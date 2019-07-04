@@ -65,6 +65,8 @@
 
         <li><a class="app-menu__item {{(Request::is('ownner/outlet') OR \Request::is('ownner/outlet/*'))? 'active': ''}}" href="{{route('ownner.outlet')}}"><i class="app-menu__icon fa fa-tasks"></i><span class="app-menu__label"> Outlet</span></a></li>
 
+        <li><a class="app-menu__item {{(Request::is('ownner/produk') OR \Request::is('ownner/produk/*'))? 'active': ''}}" href="{{route('ownner.produk')}}"><i class="app-menu__icon fa fa-tasks"></i><span class="app-menu__label"> Produk</span></a></li>
+
       </ul>
     </aside>
     @yield('content')

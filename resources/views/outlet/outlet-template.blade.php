@@ -51,7 +51,7 @@
     </header>
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-    <aside class="app-sidebar" style="background-color: {{env('COLOR_OUTLET')}}">
+    <aside class="app-sidebar" style="background-color: {{env('THEME_COLOR')}}">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="{{asset(env('APP_LOGO'))}}" alt="User Image" style="max-height: 64px; max-width: 64px">
         <div>
           <p class="app-sidebar__user-name">{{Auth::user()->nama}}</p>
@@ -64,6 +64,7 @@
         <li><a class="app-menu__item {{(Request::is('outlet'))? 'active': ''}}" href="{{route('outlet.home')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
 
         <li><a class="app-menu__item {{(Request::is('outlet/kasir') OR \Request::is('outlet/kasir/*'))? 'active': ''}}" href="{{route('outlet.kasir')}}"><i class="app-menu__icon fa fa-tasks"></i><span class="app-menu__label"> Kasir</span></a></li>
+        <li><a class="app-menu__item {{(Request::is('outlet/produk') OR \Request::is('outlet/produk/*'))? 'active': ''}}" href="{{route('outlet.produk')}}"><i class="app-menu__icon fa fa-tasks"></i><span class="app-menu__label"> Produk</span></a></li>
 
       </ul>
     </aside>
