@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ProdukOutlet;
 use Illuminate\Support\Facades\Auth;
+use App\Models\StokProdukOutlet;
 
 class ProdukController extends Controller
 {
@@ -34,8 +35,8 @@ class ProdukController extends Controller
             'deskripsi' => 'required|string',
             'harga_beli' => 'required|string',
             'harga_jual' => 'required|string',
+            'stok_awal' => 'required'
         ]);
-
 
         $produk = new ProdukOutlet();
         $produk->fill($request->all());
@@ -45,6 +46,14 @@ class ProdukController extends Controller
         }
         $produk['outlet_id'] = Auth::user()->id;
         $produk->save();
+
+        $stok = new StokProdukOutlet();
+        $stok['produk_id'] = $produk->id;
+        $stok['stok_awal'] = $request->stok_awal;
+        $stok['kredit'] = $request->stok_awal;
+        $stok['keterangan'] = "Stok Awal Pembuatan Produk";
+        $stok['stok_akhir'] = $request->stok_awal;
+        $stok->save();
 
         if($produk){
             return redirect(route('outlet.produk.show',['id'=> $produk->id]))
@@ -96,6 +105,16 @@ class ProdukController extends Controller
             return back()
             ->with(['alert'=> "'title':'Gagal Menyimpan','text':'Data gagal disimpan, periksa kembali data inputan', 'icon':'error'"])
             ->withInput($request->all());
+        }
+    }
+    public function stok()
+    {
+        if (isset($_GET['id'])) {
+            $stoks = ProdukOutlet::where('produk_id', $_GET['id'])->orderBy('id','DESC')->get();
+            return view('outlet.produk-stok', compact('stoks'));
+        }else{
+            return back()
+            ->with(['alert'=> "'title':'Muat Gagal','text':'ID Produk tidak ada yang cocok', 'icon':'error'"]);
         }
     }
     public function delete($id)

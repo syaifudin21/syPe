@@ -23,6 +23,7 @@ class CreateOutletsTable extends Migration
             $table->text('alamat');
             $table->text('foto')->nullable();
             $table->text('ktp')->nullable();
+            $table->string('service')->nullable();  //bisa dimasukkan ppn
             $table->rememberToken();
             $table->timestamps();
         });

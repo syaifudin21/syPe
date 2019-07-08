@@ -34,7 +34,7 @@
                                 <div class="form-group row">
                                     <label for="harga_beli" class="col-sm-2 col-form-label">Harga Beli</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="harga_beli" id="harga_beli" placeholder="Harga Beli" value="{{old('harga_beli')}}">
+                                        <input type="number" class="form-control" name="harga_beli" id="harga_beli" placeholder="Harga Beli" value="{{old('harga_beli')}}">
                                         @if ($errors->has('harga_beli'))
                                             <small class="form-text text-muted">{{ $errors->first('harga_beli') }}</small>
                                         @endif
@@ -43,7 +43,7 @@
                                 <div class="form-group row">
                                     <label for="harga_jual" class="col-sm-2 col-form-label">Harga Jual</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="harga_jual" id="harga_jual" placeholder="Harga Jual" value="{{old('harga_jual')}}">
+                                        <input type="number" class="form-control" name="harga_jual" id="harga_jual" placeholder="Harga Jual" value="{{old('harga_jual')}}">
                                         @if ($errors->has('harga_jual'))
                                             <small class="form-text text-muted">{{ $errors->first('harga_jual') }}</small>
                                         @endif
@@ -65,6 +65,16 @@
                                         <textarea class="form-control" name="deskripsi" id="deskripsi" placeholder="Deskripsi">{{old('deskripsi')}}</textarea>
                                         @if ($errors->has('deskripsi'))
                                             <small class="form-text text-muted">{{ $errors->first('deskripsi') }}</small>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="stok_awal" class="col-sm-2 col-form-label">Stok Awal</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="stok_awal" id="stok_awal" placeholder="Stok Awal" value="{{old('stok_awal')}}">
+                                        @if ($errors->has('stok_awal'))
+                                            <small class="form-text text-muted">{{ $errors->first('stok_awal') }}</small>
                                         @endif
                                     </div>
                                 </div>

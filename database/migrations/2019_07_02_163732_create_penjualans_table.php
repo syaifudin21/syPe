@@ -17,11 +17,13 @@ class CreatePenjualansTable extends Migration
             $table->bigIncrements('id');
             $table->string('invoice');
             $table->json('produk');
+            $table->json('produk_refisi')->nullable(); //dilakukan 
             $table->integer('ownner_id')->nullable();
             $table->integer('outlet_id');
             $table->integer('kasir_id');
             $table->integer('pelanggan_id')->nullable();
             $table->integer('tagihan');
+            $table->integer('tagihan_refisi')->nullable();
             $table->enum('status', ['Draft', 'Lunas']);
             $table->string('catatan');
             $table->softDeletes();

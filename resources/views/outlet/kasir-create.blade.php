@@ -62,7 +62,7 @@
                                 <div class="form-group row">
                                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="password" id="password" placeholder="Password Reporter" value="{{old('password')}}">
+                                        <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="{{old('password')}}">
                                         @if ($errors->has('password'))
                                             <small class="form-text text-muted">{{ $errors->first('password') }}</small>
                                         @endif

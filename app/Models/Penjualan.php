@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Penjualan extends Model
 {
     protected $fillable = [
-        'invoice','produk','ownner_id','outlet_id','kasir_id','pelanggan_id','tagihan','status','catatan'
+        'invoice','produk','ownner_id','outlet_id','kasir_id','pelanggan_id','tagihan','status','catatan','produk_refisi', 'tagihan_refisi'
     ];
     protected $casts = [
         'produk' => 'array',
+        'produk_refisi' => 'array',
     ];
 
     public function outlet(){
