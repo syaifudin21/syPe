@@ -27,16 +27,21 @@
                                 <th>Barcode</th>
                                 <th>Harga Beli</th>
                                 <th>Harga Jual</th>
+                                <th>Sisa Stok</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($produks as $produk)
+                            <?php 
+                               $stok = $produk->stok()->orderBy('id', 'DESC')->first();
+                            ?>
                             <tr>
                                 <td><b>{{$produk->nama_produk}}</b></td>
                                 <td>{{$produk->barcode}}</td>
                                 <td>{{$produk->harga_beli}}</td>
                                 <td>{{$produk->harga_jual}}</td>
+                                <td>{{empty($stok)? '': $stok->stok_akhir}}</td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-info btn-sm" href="{{route('outlet.produk.show', ['id'=> $produk->id])}}">Detail</a>
                                     <a class="btn btn-outline-secondary btn-sm" href="{{route('outlet.produk.edit', ['id'=>$produk->id])}}">Edit</a>

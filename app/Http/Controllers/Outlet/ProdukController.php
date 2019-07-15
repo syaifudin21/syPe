@@ -51,6 +51,7 @@ class ProdukController extends Controller
         $stok['produk_id'] = $produk->id;
         $stok['stok_awal'] = $request->stok_awal;
         $stok['kredit'] = $request->stok_awal;
+        $stok['debit'] = 0;
         $stok['keterangan'] = "Stok Awal Pembuatan Produk";
         $stok['stok_akhir'] = $request->stok_awal;
         $stok->save();

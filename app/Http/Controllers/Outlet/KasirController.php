@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Kasir;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class KasirController extends Controller
 {
@@ -38,6 +39,7 @@ class KasirController extends Controller
 
 
         $kasir = new Kasir();
+        $kasir['outlet_id']= Auth::user()->id;
         $kasir->fill($request->all());
         if($request->hasFile('foto')){
             $upload = app('App\Helper\Images')->upload($request->file('foto'), 'kasir');

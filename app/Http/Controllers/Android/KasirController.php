@@ -4,22 +4,41 @@ namespace App\Http\Controllers\Android;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Kasir;
+use Illuminate\Support\Facades\Hash;
 
 class KasirController extends Controller
 {
+	public function kasirdata(Request $request)
+	{
+		$outlet = Kasir::where('outlet_id', $request->outlet_id)->first();
+		if ($outlet) {
+			$kasirs = Kasir::where('outlet_id', $outlet->id)->get();
+        	$data = [
+				'kasir' => $kasirs,
+	    		'message' =>'Data Kasir berhasil dimuat',
+	    		'kode' => '00'
+	    	];
+        } else {
+			$data = [
+	    		'message' =>'Nomor Outlet Tidak Ada',
+	    		'kode' => '01'
+	    	];
+		}
+		return $data;
+
+	}
     public function kasirstore(Request $request)
     {
-
-        $chek = Kasir_outlet::where('username', $request->username)->first();
+        $chek = Kasir::where('username', $request->username)->first();
         if (!empty($chek)) {
         	$data = [
 	    		'message' =>'Username Sudah dipakai',
 	    		'kode' => '03'
 	    	];
         } else {
-	        $kasir = new Kasir_outlet();
-	        $kasir->fill($request->all());
-	        // $outlet['status'] = (!empty($request->status))?implode(',', $request['status']):'';
+	        $kasir = new Kasir();
+			$kasir->fill($request->all());
 	        $kasir['password'] = Hash::make($request['password']);
 	        $kasir->save();
 
@@ -42,7 +61,7 @@ class KasirController extends Controller
     
     public function kasirprofil(Request $request)
     {
-    	$profil = Kasir_outlet::find($request->id_kasir);
+    	$profil = Kasir::find($request->kasir_id);
     	if (!empty($profil)) {
     		$data = [
 	    		'profil' => $profil,
@@ -59,42 +78,9 @@ class KasirController extends Controller
     	return $data;
     }
 
-    public function kasirrubahpassword(Request $request)
-    {
-    	$profil = Kasir_outlet::find($request->id_kasir);
-    	if (!empty($profil)) {
-	        if (Hash::check($request->passwordlama, $profil->password)){
-	            if ($request->passwordbaru == $request->cpasswordbaru){
-	                $passwordbaru = Hash::make($request->passwordbaru);
-	                $profil->update(['password' => $passwordbaru]);
-	                $data = [
-			    		'message' =>'Password berhasil diupdate',
-			    		'kode' => '00'
-			    	];
-	            }else{
-	                $data = [
-			    		'message' =>'Konfirmasi password baru tidak sesuai.',
-			    		'kode' => '03'
-			    	];
-	            }
-	        }else{
-	            $data = [
-		    		'message' =>'Password lama tidak sesuai',
-		    		'kode' => '02'
-		    	];
-	        }
-    	}else{
-    		$data = [
-	    		'message' =>'ID ini tidak terdaftar',
-	    		'kode' => '01'
-	    	];
-    	}
-    	return $data;
-    }
-    
     public function kasirupdate(Request $request)
     {
-    	$kasir = Kasir_outlet::find($request->id_kasir);
+    	$kasir = Kasir::find($request->kasir_id);
     	if (!empty($kasir)) {
     		$kasir->fill($request->all());
 	        $kasir->update();
@@ -110,5 +96,22 @@ class KasirController extends Controller
 	    	];
     	}
     	return $data;
-    }
+	}
+	public function kasirdelete(Request $request)
+	{
+		$kasir = Kasir::find($request->kasir_id);
+    	if (!empty($kasir)) {
+	        $kasir->delete();
+	        $data = [
+	    		'message' =>'Kasir Berhasil dihapus',
+	    		'kode' => '00'
+	    	];
+    	} else {
+    		$data = [
+	    		'message' =>'Kasir Gagal Dihapus',
+	    		'kode' => '01'
+	    	];
+    	}
+    	return $data;
+	}
 }

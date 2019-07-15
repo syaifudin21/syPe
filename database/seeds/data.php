@@ -39,5 +39,13 @@ class data extends Seeder
             'alamat' => 'alamat outlet tanpa ownner',
             'password' => bcrypt('121212'),
         ]);
+        DB::table('kasirs')->insert([
+            'outlet_id' => 2,
+            'nama' => 'Outlet TO',
+            'username' => 'outlet2',
+            'hp' => '01291291201',
+            'alamat' => 'alamat outlet tanpa ownner',
+            'password' => bcrypt('121212'),
+        ]);
     }
 }

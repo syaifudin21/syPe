@@ -28,5 +28,4 @@ Route::put('/produk/update', 'Outlet\ProdukController@update')->name('outlet.pro
 Route::delete('/produk/tambah/akhir', 'Outlet\ProdukController@storeakhir')->name('outlet.produk.delete');
 
 Route::get('/stok', 'Outlet\StokController@show')->name('outlet.stok.show');
-Route::get('/stok/create', 'Outlet\StokController@create')->name('outlet.stok.create');
-Route::post('/stok/tambah', 'Outlet\StokController@store')->name('outlet.stok.store');
+Route::post('/stok/store', 'Outlet\StokController@store')->name('outlet.produk.stok.store');
