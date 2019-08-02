@@ -16,7 +16,7 @@ class KasirController extends Controller
     }
     public function index()
     {
-        $kasirs = Kasir::all();
+        $kasirs = Kasir::where('outlet_id', Auth::user()->id)->get();
     	return view('outlet.kasir', compact('kasirs'));
     }
     public function create()

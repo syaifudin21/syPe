@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Kasir;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Outlet;
 
 class KasirController extends Controller
 {
 	public function kasirdata(Request $request)
 	{
-		$outlet = Kasir::where('outlet_id', $request->outlet_id)->first();
+		$outlet = Outlet::where('id', $request->outlet_id)->first();
 		if ($outlet) {
-			$kasirs = Kasir::where('outlet_id', $outlet->id)->get();
+			$kasirs = Kasir::where('outlet_id', $request->outlet_id)->get();
         	$data = [
 				'kasir' => $kasirs,
 	    		'message' =>'Data Kasir berhasil dimuat',
