@@ -10,12 +10,10 @@ use App\Models\StokProdukOutlet;
 
 class ProdukController extends Controller
 {
-    public function pushProduk(Request $request)
+    public function produkcreate(Request $request)
     {
     	$produk = new ProdukOutlet();
         $produk->fill($request->all());
-        $produk['created_at'] = $request->time_produk;
-        $produk['updated_at'] = Carbon::now();
         $produk->save();
         if ($produk) {
         	$stok = new StokProdukOutlet();
@@ -23,8 +21,11 @@ class ProdukController extends Controller
 	        $stok['produk_id'] = $produk->id;
 	        $stok['kredit'] = $request->stok_awal;
 	        $stok['stok_akhir'] = $request->stok_awal;
-	        $stok['waktu'] = $request->time_stok;
-	        $stok->save();
+            $stok['keterangan'] = $request->keterangan;
+            $stok['invoice'] = $request->invoice;
+            $stok['created_at'] = $request->created_at;
+            $stok->save();
+            
 	        if ($stok) {
 	        	$data = [
 	        	 	'produk_id' => $produk->id,
@@ -49,9 +50,9 @@ class ProdukController extends Controller
         return $data;
         
     }
-    public function pullProduk(Request $request)
+    public function produkdata(Request $request)
     {
-        $produk = Produk::withTrashed()->where('id_outlet', $request->id_outlet)->OrderBy('id','DESC')->get();
+        $produk = ProdukOutlet::withTrashed()->where('outlet_id', $request->outlet_id)->OrderBy('id','DESC')->get();
         if (count($produk) != 0) {
             $data = [
                 'produks' => $produk,
@@ -70,7 +71,7 @@ class ProdukController extends Controller
     }
     public function pullStok(Request $request)
     {
-        $stok = StokKecil::where(['id_outlet'=> $request->id_outlet])->get();
+        $stok = StokProdukOutlet::where(['outlet_id'=> $request->outlet_id])->get();
         
         if (count($stok)!=0) {
             $data = [
@@ -89,16 +90,16 @@ class ProdukController extends Controller
     }
     public function pushStok(Request $request)
     {
-        $stokawal = StokKecil::where('id_produk', $request->id_produk)->OrderBy('id', 'Desc')->first();
+        $stokawal = StokProdukOutlet::where('produk_id', $request->produk_id)->OrderBy('id', 'Desc')->first();
 
-        if (!empty($stokawal) && !empty($request->debit)) {
-            $stok = new StokKecil;
-            $stok['id_outlet'] = $request->id_outlet;
-            $stok['id_produk'] = $request->id_produk;
-            $stok['debit'] = $request->debit;
-            $stok['stok_akhir'] = $stokawal->stok_akhir+$request->debit;
+        if (!empty($stokawal) && !empty($request->kredit)) {
+            $stok = new StokProdukOutlet;
+            $stok['outlet_id'] = $request->outlet_id;
+            $stok['produk_id'] = $request->produk_id;
+            $stok['kredit'] = $request->kredit;
+            $stok['stok_akhir'] = $stokawal->stok_akhir+$request->kredit;
             $stok['stok_awal'] = $stokawal->stok_akhir;
-            $stok['waktu'] = $request->time_stok;
+            $stok['created_at'] = $request->created_at;
             $stok->save();
 
             if ($stok) {
@@ -112,14 +113,14 @@ class ProdukController extends Controller
                     'kode'=> '01'
                 ];
             }
-        }elseif (!empty($stokawal) && !empty($request->kredit)) {
-            $stok = new StokKecil;
-            $stok['id_outlet'] = $request->id_outlet;
-            $stok['id_produk'] = $request->id_produk;
-            $stok['kredit'] = $request->kredit;
-            $stok['stok_akhir'] = $stokawal->stok_akhir-$request->kredit;
+        }elseif (!empty($stokawal) && !empty($request->debit)) {
+            $stok = new StokProdukOutlet;
+            $stok['outlet_id'] = $request->outlet_id;
+            $stok['produk_id'] = $request->produk_id;
+            $stok['debit'] = $request->debit;
+            $stok['stok_akhir'] = $stokawal->stok_akhir-$request->debit;
             $stok['stok_awal'] = $stokawal->stok_akhir;
-            $stok['waktu'] = $request->time_stok;
+            $stok['created_at'] = $request->created_at;
             $stok->save();
             if ($stok) {
                 $data = [
@@ -143,10 +144,10 @@ class ProdukController extends Controller
     }
     public function updateProduk(Request $request)
     {
-        $find = Produk::find($request->id_produk);
+        $find = Produk::find($request->produk_id);
         if (!empty($find)) {
             $find->fill($request->all());
-            $find['updated_at'] = $request->time_produk_update;
+            $find['updated_at'] = $request->updated_at;
             $find->save();
 
             if ($find) {
@@ -170,7 +171,7 @@ class ProdukController extends Controller
     }
     public function deleteProduk(Request $request)
     {
-        $find = Produk::find($request->id_produk);
+        $find = ProdukOutlet::find($request->produk_id);
         if (!empty($find)) {
             $find->delete();
             if ($find) {
@@ -186,36 +187,10 @@ class ProdukController extends Controller
             }
         } else {
             $data = [
-
                 'message' => 'ID Produk Tidak ditemukan',
                 'kode'=> '02'
             ];
         }
         return $data;
-    }
-    public function upload(Request $request)
-    {
-        if ($request->hasFile('foto')){
-            $namafoto = $request->file('foto')->getClientOriginalName();
-            Storage::disk('ftp-mpost')->put($namafoto, fopen($request->file('foto'), 'r+'));
-            $produk['foto'] = $namafoto;
-            $data = [
-                'nama' => $namafoto,
-                'message' => 'Berhasil Upload',
-                'kode' => '00'
-            ];
-        }else{
-            $data = [
-                'message' => 'Gagal Upload FTP',
-                'kode' => '01'
-            ];
-        }
-
-        return $data;
-    }
-    public function removeftp(Request $request)
-    {
-        Storage::disk('ftp-mpost')->delete($request->foto);
-        return $request->foto;
     }
 }

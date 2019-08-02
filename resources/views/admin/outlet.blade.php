@@ -28,6 +28,7 @@
                                 <th>Alamat</th>
                                 <th>Username</th>
                                 <th>hp</th>
+                                <th>Kasir</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -39,6 +40,7 @@
                                 <td>{{$outlet->alamat}}</td>
                                 <td>{{$outlet->username}}</td>
                                 <td>{{$outlet->hp}}</td>
+                                <td>{{$outlet->kasir()->count()}}</td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-info btn-sm" href="{{route('admin.outlet.show', ['id'=> $outlet->id])}}">Detail</a>
                                     <a class="btn btn-outline-secondary btn-sm" href="{{route('admin.outlet.edit', ['id'=>$outlet->id])}}">Edit</a>

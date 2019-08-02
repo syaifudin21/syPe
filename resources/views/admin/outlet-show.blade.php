@@ -17,7 +17,7 @@
         <div class="col-md-12 col-sm-12">
 			<div class="tile">
                 <div class="row">
-                    <div class="col-md-3 col-sm-12">
+                    <div class="col-md-2 col-sm-12">
                         @if (!empty($outlet->foto))
                         <img src="{{asset($outlet->foto)}}" style="max-width: 100%" class="rounded" alt="Icon outlet" class="mr-3">
                         @else
@@ -26,7 +26,7 @@
                         </div>
                         @endif
                     </div>
-                    <div class="col-md-9 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
 
                         <table class="table table-sm ">
                             <tr><td>Nama</td> <td>{{$outlet->nama}}</td></tr>
@@ -34,6 +34,16 @@
                             <tr><td>Alamat</td> <td>{{$outlet->alamat}}</td></tr>
                             <tr><td>HP</td> <td>{{$outlet->hp}}</td></tr>
                         </table>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            Kasir Terdaftar
+                        </a>
+                        @foreach ($outlet->kasir()->get() as $kasir)
+                        <a href="#" class="list-group-item list-group-item-action">{{$kasir->nama}}</a>
+                        @endforeach
+                        </div>
                     </div>
                 </div>
 
