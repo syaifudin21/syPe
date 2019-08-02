@@ -154,7 +154,7 @@ class ProdukController extends Controller
                 $stok['created_at'] = $request->created_at;
                 $stok->save();
                 $data = [
-                    'stok_akihr' => $stok->stok,
+                    'stok_akihr' => $stok->stok_akhir,
                     'message' => 'Berhasil Create Stok',
                     'kode' => '00'
                 ];
