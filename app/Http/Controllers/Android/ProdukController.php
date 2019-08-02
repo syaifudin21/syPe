@@ -147,14 +147,14 @@ class ProdukController extends Controller
                 $stok = new StokProdukOutlet();
                 $stok['produk_id'] = $request->produk_id;
                 $stok['stok_awal'] = 0;
-                $stok['kredit'] = $request->kredit;
-                $stok['stok_akhir'] = $request->kredit;
+                $stok['kredit'] = $request->stok;
+                $stok['stok_akhir'] = $request->stok;
                 $stok['invoice'] = $request->invoice;
                 $stok['keterangan'] = $request->keterangan;
                 $stok['created_at'] = $request->created_at;
                 $stok->save();
                 $data = [
-                    'stok_akihr' => $stok->stok_akhir,
+                    'stok_akihr' => $stok->stok,
                     'message' => 'Berhasil Create Stok',
                     'kode' => '00'
                 ];
