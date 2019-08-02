@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class KirimStok extends Model
 {
+    use SoftDeletes;
+
    protected $fillable = [
         'ownner_id','outlet_id','produk','tagihan','status','keterangan'
     ];

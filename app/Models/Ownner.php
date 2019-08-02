@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ownner extends Authenticatable
 {
     use Notifiable;
-
+    use SoftDeletes;
     protected $fillable = [
         'nama', 'username', 'password', 'hp', 'alamat', 'foto', 'ktp'
     ];
@@ -17,6 +18,7 @@ class Ownner extends Authenticatable
     ];
     protected $casts = [
     ];
+    
 
     public function produk()
     {

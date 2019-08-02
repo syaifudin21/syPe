@@ -23,6 +23,7 @@ class CreateStokProdukOutletsTable extends Migration
             $table->integer('invoice')->nullable();
             $table->json('keterangan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

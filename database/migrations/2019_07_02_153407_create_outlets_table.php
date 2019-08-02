@@ -26,6 +26,7 @@ class CreateOutletsTable extends Migration
             $table->string('service')->nullable();  //bisa dimasukkan ppn
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

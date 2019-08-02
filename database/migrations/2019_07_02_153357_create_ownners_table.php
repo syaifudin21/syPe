@@ -24,6 +24,7 @@ class CreateOwnnersTable extends Migration
             $table->text('ktp')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

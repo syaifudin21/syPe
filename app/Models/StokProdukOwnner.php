@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StokProdukOwnner extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'produk_id','stok_awal','debit','kredit','stok_akhir','invoice','keterangan'
     ];

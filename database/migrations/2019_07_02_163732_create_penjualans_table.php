@@ -26,8 +26,8 @@ class CreatePenjualansTable extends Migration
             $table->integer('tagihan_refisi')->nullable();
             $table->enum('status', ['Draft', 'Lunas']);
             $table->string('catatan');
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

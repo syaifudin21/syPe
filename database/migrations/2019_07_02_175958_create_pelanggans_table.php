@@ -19,6 +19,7 @@ class CreatePelanggansTable extends Migration
             $table->string('nama');
             $table->string('alamat')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

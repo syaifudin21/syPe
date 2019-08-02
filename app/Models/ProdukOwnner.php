@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProdukOwnner extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'ownner_id','nama_produk','deskripsi', 'foto','barcode','harga_beli','harga_jual'
     ];

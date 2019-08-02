@@ -22,6 +22,7 @@ class CreateKirimStoksTable extends Migration
             $table->enum('status', ['Permintaan', 'Konfirmasi', 'Dikirim','Sampai']);
             $table->text('keterangan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

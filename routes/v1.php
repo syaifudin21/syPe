@@ -10,3 +10,8 @@ Route::post('/outlet/kasir/data', 'Android\KasirController@kasirdata');
 Route::post('/outlet/kasir/store', 'Android\KasirController@kasirstore');
 Route::post('/outlet/kasir/update', 'Android\KasirController@kasirupdate');
 Route::post('/outlet/kasir/delete', 'Android\KasirController@kasirdelete');
+
+Route::post('/outlet/produk/data', 'Android\ProdukController@produkdata');
+Route::post('/outlet/produk/store', 'Android\ProdukController@produkstore');
+Route::post('/outlet/produk/update', 'Android\ProdukController@produkupdate');
+Route::post('/outlet/produk/delete', 'Android\ProdukController@produkdelete');

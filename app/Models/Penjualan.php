@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Penjualan extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'invoice','produk','ownner_id','outlet_id','kasir_id','pelanggan_id','tagihan','status','catatan','produk_refisi', 'tagihan_refisi'
     ];

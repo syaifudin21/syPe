@@ -23,6 +23,7 @@ class CreateProdukOutletsTable extends Migration
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

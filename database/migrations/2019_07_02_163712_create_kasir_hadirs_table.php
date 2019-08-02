@@ -20,6 +20,7 @@ class CreateKasirHadirsTable extends Migration
             $table->dateTime('waktu_in')->nullable();
             $table->dateTime('waktu_out')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
