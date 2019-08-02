@@ -15,3 +15,6 @@ Route::post('/outlet/produk/data', 'Android\ProdukController@produkdata');
 Route::post('/outlet/produk/store', 'Android\ProdukController@produkstore');
 Route::post('/outlet/produk/update', 'Android\ProdukController@produkupdate');
 Route::post('/outlet/produk/delete', 'Android\ProdukController@produkdelete');
+
+Route::post('/outlet/stok/store', 'Android\ProdukController@stokstore');
+Route::post('/outlet/stok/data', 'Android\ProdukController@stokdata');
